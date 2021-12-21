@@ -1,6 +1,7 @@
 pool:
-  name: Default
+  name: Azure Pipelines
   demands:
+  - agent.name -equals Ravi
   - msbuild
   - visualstudio
   - vstest
@@ -29,12 +30,13 @@ steps:
   displayName: 'NuGet restore'
   inputs:
     restoreSolution: '$(Parameters.solution)'
-    
+
 - task: VSBuild@1
+  displayName: 'Build solution **\*.sln'
   inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    solution: '$(Parameters.solution)'
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
 
 - task: VSTest@2
   displayName: 'VsTest - testAssemblies'
