@@ -22,6 +22,9 @@ steps:
 - task: NuGetToolInstaller@1
   inputs:
     versionSpec: '4.4.1'
+- task: VSBuild@1
+  inputs:
+    solution: '**\*.sln'
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
@@ -30,6 +33,7 @@ steps:
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
+
 
 
 
